@@ -1,15 +1,35 @@
 // Mock API order function for demonstration
+const inventory = {
+    peach: 10,
+    oranges: 10,
+    bananas: 10,
+    peas: 10,
+    mangoes: 10,
+    arrowroots: 10,
+    lime: 10,
+    watermelon: 10
+};
 
+function displayInventory() {
+    const inventoryList = document.getElementById('inventoryList');
+    inventoryList.innerHTML = ''; // Clear the list before updating
+    for (let fruit in inventory) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${fruit}: ${inventory[fruit]} available`;
+        inventoryList.appendChild(listItem);
+    }
+}
 
 function order(query, onSuccess, onError) {
     // Simulate API response
-    const fruits = ['peach', 'oranges', 'bananas', 'peas', 'mangos', 'arrowroots', 'lime', 'watermelon'];
+    // const fruits = ['peach', 'oranges', 'bananas', 'peas', 'mangos', 'arrowroots', 'lime', 'watermelon'];
 
     let caseLower = query.variety.toLowerCase();
 
-    if (fruits.includes(caseLower) && query.quantity <= 100) {
+    if (inventory[caseLower] !== undefined && inventory[caseLower] >= query.quantity) {
+        inventory[caseLower] -= query.quantity;
         onSuccess(query);
-        fruits.pop();
+        
     } else {
         onError(query);
     }
@@ -21,21 +41,31 @@ function order(query, onSuccess, onError) {
  */
 function notify(notification, query, style = {}) {
     const notificationElement = document.getElementById('notification')
-    notificationElement.textContent = notification.message;
+    notificationElement.innerHTML = '';
+
+// Display the notification message
+const messageElement = document.createElement('p');
+ messageElement.textContent = notification.message;   
+ Object.assign(messageElement.style, style);
+ notificationElement.appendChild(messageElement);
 
       // Display order details
       const detailsElement = document.createElement('p');
       detailsElement.textContent = `Variety: ${query.variety}, Quantity: ${query.quantity}`;
       notificationElement.appendChild(detailsElement);
 
-    Object.assign(notificationElement.style, style);
+        // Display remaining inventory  for the ordered fruit
+    const remainingElement = document.createElement('p');
+    remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()]}`;
+    notificationElement.appendChild(remainingElement);
+
 }
 
 /**
  * Callback function for successful orders.
  */
 function onSuccess(query) {
-    notify({ message: `The order was a success` }, query, {color :"black"} );
+    notify({ message: 'The order was successful' }, query, {color : "#1A3636" });
     
 }
 
@@ -73,3 +103,4 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     const quantity = parseInt(document.getElementById('quantity').value);
     postOrder(variety, quantity);
 });
+displayInventory();

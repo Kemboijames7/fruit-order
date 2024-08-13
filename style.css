@@ -10,6 +10,8 @@ body {
 
 #app {
     background-color: #C5705D;
+    width: 600px;
+    margin: auto;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -45,13 +47,17 @@ button:hover {
 }
 
 #notification {
-    margin-top: 20px;
+    margin-top: 10px;
+    align-items: center;
+    justify-items: center;
     font-size: 16px;
     background-color: #DFD3C3;
-
+    padding: 10px 5px;
+    border-radius: 20px;
 }
 
 .error-message{
     background-color: red;
     font-weight: bold;
 }
+
