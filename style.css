@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #DEAC80;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@ body {
 }
 
 #app {
-    background-color: white;
+    background-color: #C5705D;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -47,4 +47,11 @@ button:hover {
 #notification {
     margin-top: 20px;
     font-size: 16px;
+    background-color: #DFD3C3;
+
+}
+
+.error-message{
+    background-color: red;
+    font-weight: bold;
 }

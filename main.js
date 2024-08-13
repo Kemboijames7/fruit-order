@@ -35,7 +35,7 @@ function notify(notification, query, style = {}) {
  * Callback function for successful orders.
  */
 function onSuccess(query) {
-    notify({ message: `The order was a success` }, query, {color :"green"} );
+    notify({ message: `The order was a success` }, query, {color :"black"} );
     
 }
 
