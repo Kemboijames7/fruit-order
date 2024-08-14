@@ -43,6 +43,13 @@ function notify(notification, query, style = {}) {
     const notificationElement = document.getElementById('notification')
     notificationElement.innerHTML = '';
 
+    // Apply dynamic background color based on success or error
+    const backgroundColor = style.backgroundColor || "#C5705D";
+    notificationElement.style.backgroundColor = backgroundColor;
+
+    // Add transition for smooth background color change
+    notificationElement.style.transition = "background-color 0.5s ease"; 
+
 // Display the notification message
 const messageElement = document.createElement('p');
  messageElement.textContent = notification.message;   

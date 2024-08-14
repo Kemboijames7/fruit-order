@@ -51,7 +51,7 @@ button:hover {
     align-items: center;
     justify-items: center;
     font-size: 16px;
-    background-color: #DFD3C3;
+    /* background-color: #DFD3C3; */
     padding: 10px 5px;
     border-radius: 20px;
 }
