@@ -14,16 +14,28 @@
             <input type="text" id="variety" name="variety" required>
 
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" required>
+            <input type="number" id="quantity" name="quantity" min="1" required>
 
             <button type="submit">Place Order</button>
         </form>
 
         <div id="notification"></div>
-
+        
         <h2>Available Inventory</h2>
         <ul id="inventoryList"></ul>
     </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Order Confirmation</h2>
+            <p id="orderConfirmationMessage"></p>
+            <p id="estimatedDeliveryTime"></p>
+            <a href="#" id="viewReceipt">View/Print Receipt</a>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 </html>

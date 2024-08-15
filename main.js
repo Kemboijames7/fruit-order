@@ -26,12 +26,18 @@ function order(query, onSuccess, onError) {
 
     let caseLower = query.variety.toLowerCase();
 
-    if (inventory[caseLower] !== undefined && inventory[caseLower] >= query.quantity) {
+      // Check if the fruit exists in the inventory
+    if (inventory[caseLower] === undefined) {
+        onError({ message: `Invalid fruit: ${query.variety} not in inventory` });
+        return;
+    }
+
+    if (inventory[caseLower] >= query.quantity) {
         inventory[caseLower] -= query.quantity;
         onSuccess(query);
         
     } else {
-        onError(query);
+        onError({ message: `Insufficient quantity: only ${inventory[caseLower]} of ${query.variety} left` });
     }
 }
 
@@ -44,7 +50,7 @@ function notify(notification, query, style = {}) {
     notificationElement.innerHTML = '';
 
     // Apply dynamic background color based on success or error
-    const backgroundColor = style.backgroundColor || "#C5705D";
+    const backgroundColor = style.backgroundColor || "#F7DCB9";
     notificationElement.style.backgroundColor = backgroundColor;
 
     // Add transition for smooth background color change
@@ -66,7 +72,13 @@ const messageElement = document.createElement('p');
     remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()]}`;
     notificationElement.appendChild(remainingElement);
 
+
+   // Show order confirmation modal for successful orders
+   if (notification.message.toLowerCase().includes("successful")) {
+    showOrderConfirmationModal(query);
 }
+}
+
 
 /**
  * Callback function for successful orders.
@@ -79,8 +91,8 @@ function onSuccess(query) {
 /**
  * Callback function for failed orders.
  */
-function onError(query) {
-    notify({ message: 'invalid' }, query, {color :"red"});
+function onError(notification) {
+    notify(notification, null, {color :"red"});
 }
 
 /**
@@ -91,6 +103,28 @@ function onError(query) {
  */
 function orderFromGrocer(query, onSuccess, onError) {
     order(query, onSuccess, onError);
+}
+
+// Show order confirmation modal
+function showOrderConfirmationModal(query) {
+    const modal = document.getElementById("orderModal");
+    const closeButton = document.querySelector(".close-button");
+
+    // Display order details in the modal
+    document.getElementById("orderConfirmationMessage").textContent = `Thank you for your order of ${query.quantity} ${query.variety}(s).`;
+    document.getElementById("estimatedDeliveryTime").textContent = "Estimated delivery time: 2-3 days.";
+
+    modal.style.display = "block";
+
+    closeButton.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
 }
 
 /**
