@@ -1,43 +1,67 @@
 // Mock API order function for demonstration
 const inventory = {
-    peach: 10,
-    oranges: 10,
-    bananas: 10,
-    peas: 10,
-    mangoes: 10,
-    arrowroots: 10,
-    lime: 10,
-    watermelon: 10
+    peach: { quantity: 10, age: 3 },
+    oranges: { quantity: 10, age: 5 },
+    bananas: { quantity: 5, age: 10 },
+    peas: { quantity: 15, age: 2 },
+    mangoes: { quantity: 10, age: 6 },
+    arrowroots: { quantity: 7, age: 9 },
+    lime: { quantity: 3, age: 7 },
+    watermelon: { quantity: 12, age: 4 }
 };
+
+// Function to determine the fruits that should be discounted
+function determineDiscountedFruits() {
+    let discountedFruits = [];
+    for (const fruit in inventory) {
+        const { quantity, age } = inventory[fruit];
+        // Apply discount if the fruit is either in high quantity or has been in stock too long
+        if (quantity > 5 || age > 7) {
+            discountedFruits.push(fruit);
+        }
+    }
+    return discountedFruits;
+}
+
+// Function to apply a discount to the order
+function applyDiscount(variety, quantity) {
+    const discountedFruits = determineDiscountedFruits();
+    const caseLower = variety.toLowerCase();
+    if (discountedFruits.includes(caseLower)) {
+        return {
+            message: `A discount has been applied to your order of ${quantity} ${variety}(s)!`,
+            discount: true,
+            discountAmount: 0.20 // Example: 20% discount
+        };
+    } else {
+        return { message: 'No discount applied.', discount: false, discountAmount: 0 };
+    }
+}
 
 function displayInventory() {
     const inventoryList = document.getElementById('inventoryList');
     inventoryList.innerHTML = ''; // Clear the list before updating
     for (let fruit in inventory) {
         const listItem = document.createElement('li');
-        listItem.textContent = `${fruit}: ${inventory[fruit]} available`;
+        listItem.textContent = `${fruit}: ${inventory[fruit].quantity} available (Age: ${inventory[fruit].age} days)`;
         inventoryList.appendChild(listItem);
     }
 }
 
 function order(query, onSuccess, onError) {
-    // Simulate API response
-    // const fruits = ['peach', 'oranges', 'bananas', 'peas', 'mangos', 'arrowroots', 'lime', 'watermelon'];
-
     let caseLower = query.variety.toLowerCase();
 
-      // Check if the fruit exists in the inventory
+    // Check if the fruit exists in the inventory
     if (inventory[caseLower] === undefined) {
         onError({ message: `Invalid fruit: ${query.variety} not in inventory` });
         return;
     }
 
-    if (inventory[caseLower] >= query.quantity) {
-        inventory[caseLower] -= query.quantity;
+    if (inventory[caseLower].quantity >= query.quantity) {
+        inventory[caseLower].quantity -= query.quantity;
         onSuccess(query);
-        
     } else {
-        onError({ message: `Insufficient quantity: only ${inventory[caseLower]} of ${query.variety} left` });
+        onError({ message: `Insufficient quantity: only ${inventory[caseLower].quantity} of ${query.variety} left` });
     }
 }
 
@@ -46,7 +70,7 @@ function order(query, onSuccess, onError) {
  * @param {Object} notification - The notification object containing the message.
  */
 function notify(notification, query, style = {}) {
-    const notificationElement = document.getElementById('notification')
+    const notificationElement = document.getElementById('notification');
     notificationElement.innerHTML = '';
 
     // Apply dynamic background color based on success or error
@@ -56,43 +80,48 @@ function notify(notification, query, style = {}) {
     // Add transition for smooth background color change
     notificationElement.style.transition = "background-color 0.5s ease"; 
 
-// Display the notification message
-const messageElement = document.createElement('p');
- messageElement.textContent = notification.message;   
- Object.assign(messageElement.style, style);
- notificationElement.appendChild(messageElement);
+    // Display the notification message
+    const messageElement = document.createElement('p');
+    messageElement.textContent = notification.message;   
+    Object.assign(messageElement.style, style);
+    notificationElement.appendChild(messageElement);
 
-      // Display order details
-      const detailsElement = document.createElement('p');
-      detailsElement.textContent = `Variety: ${query.variety}, Quantity: ${query.quantity}`;
-      notificationElement.appendChild(detailsElement);
+    // Display order details
+    const detailsElement = document.createElement('p');
+    detailsElement.textContent = `Variety: ${query.variety}, Quantity: ${query.quantity}`;
+    notificationElement.appendChild(detailsElement);
 
-        // Display remaining inventory  for the ordered fruit
+    // Display remaining inventory for the ordered fruit
     const remainingElement = document.createElement('p');
-    remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()]}`;
+    remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()].quantity}`;
     notificationElement.appendChild(remainingElement);
 
+    // Display discount information if applicable
+    if (notification.discount) {
+        const discountElement = document.createElement('p');
+        discountElement.textContent = `A discount of ${notification.discountAmount * 100}% has been applied!`;
+        discountElement.style.color = "green";
+        notificationElement.appendChild(discountElement);
+    }
 
-   // Show order confirmation modal for successful orders
-   if (notification.message.toLowerCase().includes("successful")) {
-    showOrderConfirmationModal(query);
+    // Show order confirmation modal for successful orders
+    if (notification.message.toLowerCase().includes("successful")) {
+        showOrderConfirmationModal(query);
+    }
 }
-}
-
 
 /**
  * Callback function for successful orders.
  */
 function onSuccess(query) {
-    notify({ message: 'The order was successful' }, query, {color : "#1A3636" });
-    
+    notify({ message: 'The order was successful' }, query, { color: "#1A3636" });
 }
 
 /**
  * Callback function for failed orders.
  */
 function onError(notification) {
-    notify(notification, null, {color :"red"});
+    notify(notification, null, { color: "red" });
 }
 
 /**
@@ -133,8 +162,16 @@ function showOrderConfirmationModal(query) {
  * @param {number} quantity - The quantity of fruit to order.
  */
 function postOrder(variety, quantity) {
-    const query = { variety, quantity };
-    orderFromGrocer(query, onSuccess, onError);
+    const discountInfo = applyDiscount(variety, quantity);
+    const query = { variety, quantity: quantity }; // Use updated quantity if discount is applied
+
+    if (discountInfo.discount) {
+        query.quantity = Math.ceil(quantity * (1 - discountInfo.discountAmount));
+    }
+
+    orderFromGrocer(query, function(query) {
+        notify({ message: 'The order was successful', ...discountInfo }, query, { color: "#1A3636" });
+    }, onError);
 }
 
 // Handling form submission
