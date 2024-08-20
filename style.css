@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -16,6 +16,16 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+/* 
+#searchInput{
+   justify-content: flex-end;
+    flex-direction: row;
+    align-items: flex-end;
+
+} */
+
+
+
 
 
 form {
@@ -32,6 +42,11 @@ input {
     padding: 8px;
     border: 1px solid #ced4da;
     border-radius: 4px;
+}
+
+.submii{
+    
+  margin:  10px;
 }
 
 button {
@@ -103,4 +118,62 @@ button:hover {
 .close-button:hover,
 .close-button:focus {
     color: black;
+}
+
+
+    footer {
+        display: flexbox;
+        background-color: #C5705D;
+         /* Adjusted width to ensure it fits the entire container */
+       /* Added margin to give some space at the top */
+        /* Added padding to give some space inside the footer */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Center the footer text */
+        justify-content: center;
+        text-wrap: wrap;
+    }
+
+    /* CSS for subscription form */
+#subscribeForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="email"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.subscribe-notification {
+    margin-bottom: 5px; /* Space between the notification and the button */
+    font-size: 10px;
+}
+
+.submitButtonContainer {
+    margin-top: 10px;
+}
+
+button {
+    display: flex;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
 }

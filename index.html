@@ -9,6 +9,21 @@
 <body>
     <div id="app">
         <h1>Order Your Fresh Fruit</h1>
+
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <span> <ul id="results"></ul></span>
+
+        <form action="/user-action" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="action">
+                <option value="register">Register</option>
+                <option value="login">Login</option>
+            </select>
+
+            <button type="submit" class="submii">Submit</button>
+        </form>
+
         <form id="orderForm">
             <label for="variety">Fruit Variety:</label>
             <input type="text" id="variety" name="variety" required>
@@ -23,17 +38,40 @@
         
         <h2>Available Inventory</h2>
         <ul id="inventoryList"></ul>
-    </div>
 
-    <!-- Order Confirmation Modal -->
-    <div id="orderModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Order Confirmation</h2>
-            <p id="orderConfirmationMessage"></p>
-            <p id="estimatedDeliveryTime"></p>
-            <a href="#" id="viewReceipt">View/Print Receipt</a>
+        <!-- Order Confirmation Modal -->
+        <div id="orderModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Order Confirmation</h2>
+                <p id="orderConfirmationMessage"></p>
+                <p id="estimatedDeliveryTime"></p>
+                <a href="#" id="viewReceipt">View/Print Receipt</a>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer>
+            Subscribe to our newsletter and you will receive a 10% discount code.
+            Enter your email address below to be the first to know about special offers,
+            new fruits, and other discounts.
+            <form id="subscribeForm">
+                <label for="emailInput">Enter your email *</label>
+                <input type="email" id="emailInput" name="email" placeholder="Email address" >
+                <div id="subscribeNotification"></div>
+
+                <div class="SubmitButton_container__3wNjE submitButtonContainer">
+                    <input class="SubmitButton_submitButton__28tLg button1 contact-form-submit-btn" 
+                           type="submit" 
+                           style="font-size:18px; line-height:22px; text-align:center" 
+                           data-title="Subscribe" 
+                           value="Subscribe">
+                </div>
+            </form>
+        
+            
+
+        </footer>
     </div>
 
     <script src="main.js"></script>

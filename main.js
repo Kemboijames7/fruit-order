@@ -182,3 +182,26 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     postOrder(variety, quantity);
 });
 displayInventory();
+
+
+document.getElementById('subscribeForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    const emailInput = document.getElementById('emailInput').value;
+    const notification = document.getElementById('subscribeNotification');
+
+    // Here you would typically send the email to your server or an API
+    // For demonstration, we'll just simulate a successful subscription
+
+    if (emailInput) {
+        notification.textContent = `Thank you for subscribing! A confirmation email has been sent to ${emailInput}.`;
+        notification.style.color = 'green';
+        notification.style.fontWeight = 'bold';
+    } else {
+        notification.textContent = 'Please enter a valid email address.';
+        notification.style.color = 'red';
+    }
+
+    // Clear the input field
+    document.getElementById('subscribeForm').reset();
+});
