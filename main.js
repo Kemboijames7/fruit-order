@@ -27,16 +27,26 @@ function determineDiscountedFruits() {
 function applyDiscount(variety, quantity) {
     const discountedFruits = determineDiscountedFruits();
     const caseLower = variety.toLowerCase();
+    let discountAmount = 0;
+
     if (discountedFruits.includes(caseLower)) {
+        const { age, quantity: fruitQuantity } = inventory[caseLower];
+        
+        // More aggressive discount for older fruits
+        if (age > 7) discountAmount = 0.30;
+        else if (fruitQuantity > 10) discountAmount = 0.20;
+        else discountAmount = 0.10;
+        
         return {
-            message: `A discount has been applied to your order of ${quantity} ${variety}(s)!`,
+            message: `A discount of ${discountAmount * 100}% has been applied to your order of ${quantity} ${variety}(s)!`,
             discount: true,
-            discountAmount: 0.20 // Example: 20% discount
+            discountAmount
         };
     } else {
         return { message: 'No discount applied.', discount: false, discountAmount: 0 };
     }
 }
+
 
 function displayInventory() {
     const inventoryList = document.getElementById('inventoryList');
