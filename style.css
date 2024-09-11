@@ -9,8 +9,9 @@ body {
 }
 
 #app {
+ 
     background-color: #C5705D;
-    width: 600px;
+    width: 800px;
     margin: auto;
     padding: 20px;
     border-radius: 8px;
@@ -177,3 +178,19 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+p {
+    padding:   10px;
+    font-size: 1.25rem;
+    color: var(--text-light);
+    background-color: var(--white);
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  footer {
+    padding: 20px;
+    width: 700px;
+    margin: auto;
+  }
+  

@@ -6,7 +6,9 @@ const inventory = {
     peas: { quantity: 15, age: 2 },
     mangoes: { quantity: 10, age: 6 },
     arrowroots: { quantity: 7, age: 9 },
-    lime: { quantity: 3, age: 7 },
+    lime: { quantity: 16, age: 7 },
+    macadamia: { quantity: 20, age: 9 },
+    berry: { quantity: 6, age: 8 },
     watermelon: { quantity: 12, age: 4 }
 };
 
