@@ -84,24 +84,24 @@ function order(query, onSuccess, onError) {
 function notify(notification, query, style = {}) {
     const notificationElement = document.getElementById('notification');
     notificationElement.innerHTML = '';
-
+    
     // Apply dynamic background color based on success or error
     const backgroundColor = style.backgroundColor || "#F7DCB9";
     notificationElement.style.backgroundColor = backgroundColor;
-
+    
     // Add transition for smooth background color change
-    notificationElement.style.transition = "background-color 0.5s ease"; 
-
-    // Display the notification message
+    notificationElement.style.transition = "background-color 0.5s ease";
+    
     const messageElement = document.createElement('p');
-    messageElement.textContent = notification.message;   
+    messageElement.textContent = notification.message;
     Object.assign(messageElement.style, style);
     notificationElement.appendChild(messageElement);
-
-    // Display order details
-    const detailsElement = document.createElement('p');
-    detailsElement.textContent = `Variety: ${query.variety}, Quantity: ${query.quantity}`;
-    notificationElement.appendChild(detailsElement);
+    
+    if (query && query.variety && query.quantity) {
+        const detailsElement = document.createElement('p');
+        detailsElement.textContent = `Variety: ${query.variety}, Quantity: ${query.quantity}`;
+        notificationElement.appendChild(detailsElement);
+    }
 
     // Display remaining inventory for the ordered fruit
     const remainingElement = document.createElement('p');
@@ -116,11 +116,17 @@ function notify(notification, query, style = {}) {
         notificationElement.appendChild(discountElement);
     }
 
-    // Show order confirmation modal for successful orders
-    if (notification.message.toLowerCase().includes("successful")) {
+    // Trigger order confirmation modal based on success flag, not the message content
+    if (notification.success) {
         showOrderConfirmationModal(query);
     }
+
+    // Auto-hide notification after 5 seconds
+    setTimeout(() => {
+        notificationElement.style.display = 'none';
+    }, 5000); // 5 seconds delay
 }
+
 
 /**
  * Callback function for successful orders.
