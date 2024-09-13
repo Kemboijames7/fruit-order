@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root{
+    --primary-color: #0f1a2c;
+    --secondary-color:#f6ac0f;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --extra-light: #f8fafc;
+    --white: #ffffff;
+    --max-width: 1200px;
+    --header-font: "playfair Display", serif;
+}
+*{
+    /* padding: 0;
+    margin: 0; */
+    box-sizing: border-box;
+
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #DEAC80;
@@ -123,14 +142,11 @@ button:hover {
 
 
     footer {
-        display: flexbox;
+        /* display: flexbox; */
         background-color: #C5705D;
-         /* Adjusted width to ensure it fits the entire container */
-       /* Added margin to give some space at the top */
-        /* Added padding to give some space inside the footer */
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center; /* Center the footer text */
+        text-align: center; 
         justify-content: center;
         text-wrap: wrap;
     }
@@ -167,7 +183,7 @@ input[type="email"] {
 button {
     display: flex;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #007bff; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -179,18 +195,37 @@ button:hover {
     background-color: #0056b3;
 }
 
-p {
-    padding:   10px;
+.footer__socials {
+    padding:   20px;
     font-size: 1.25rem;
     color: var(--text-light);
-    background-color: var(--white);
+    background-color:  #eef3f1;
     border-radius: 100%;
-    cursor: pointer;
     transition: 0.3s;
+    
   }
+
   footer {
     padding: 20px;
     width: 700px;
     margin: auto;
   }
+
+  .footer__col {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-family: var(--header-font);
+    color: var(--white);
+  }
+  .footer__socials a:hover {
+    color: var(--white);
+    background-color: #9B86BD;
+  }
+  .footer__links li {
+    margin-bottom: 1rem;
+    align-items: center;
+    gap: 1rem;
+  }
+
   
