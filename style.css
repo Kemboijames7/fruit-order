@@ -194,18 +194,26 @@ button:hover {
     background-color: #C8ACD6;
 }
 
-.footer__socials {
+.footer__socials  {
     padding:   20px;
     font-size: 1.25rem;
-    color: var(--text-light);
-    background-color:  #eef3f1;
+    color: #ffffff;
+    background-color: #674636;
     border-radius: 100%;
     transition: 0.3s;
     
   }
-
+  .footer__socials a {
+    border-radius: 100%;
+    padding: 6px 10px;
+    font-size: 1.25rem;
+    color: #0f0e0e;
+    background-color:  #e5efef;
+    transition: 0.3s;
+  }
+ 
   footer {
-    padding: 20px;
+    padding: 10px;
      background-color:#7D8ABC ;
   }
 
@@ -219,11 +227,13 @@ button:hover {
   
   .footer__socials a:hover {
     color: var(--white);
-    background-color: #9B86BD;
+    background-color: #AAB396;
   }
 
 
-  .footer__links li {
+  .footer__links  {
+    border-radius: 10px;
+    margin-top: 1rem;
     margin-bottom: 1rem;
     align-items: center;
     gap: 1rem;
@@ -232,4 +242,5 @@ button:hover {
   .footer__links a {
     color: var(--text-light);
     transition: 0.3s;
+    
   }

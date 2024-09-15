@@ -1,3 +1,18 @@
+const scrollRevealOption = {
+    distance: "50px",
+    origin: "bottom",
+    duration:1000,
+};
+
+scrollRevealOption().reveal(".member",{
+    ...scrollRevealOption,
+    delay:500
+});
+
+
+
+
+
 // Mock API order function for demonstration
 const inventory = {
     peach: { quantity: 10, age: 3 },
