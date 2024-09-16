@@ -11,23 +11,55 @@ sr.reveal(".member", {
     ...scrollRevealOption,
     delay: 500
 });
+// Modal and form elements
+const memberIcon = document.querySelector('.member');
+const authModal = document.getElementById('authModal');
+const userForm = document.getElementById('userForm');
+const signInBtn = document.getElementById('signInBtn');
+const signUpBtn = document.getElementById('signUpBtn');
+const userAction = document.getElementById('userAction');
+
+// Show the Sign In / Sign Up modal when the member icon is clicked
+memberIcon.addEventListener('click', function() {
+    authModal.style.display = 'block'; // Show modal
+});
+
+// Handle the Sign In button click
+signInBtn.addEventListener('click', function() {
+    userAction.value = 'login'; // Set form action to login
+    userForm.style.display = 'block'; // Show the form
+    authModal.style.display = 'none'; // Hide the modal
+});
+
+// Handle the Sign Up button click
+signUpBtn.addEventListener('click', function() {
+    userAction.value = 'register'; // Set form action to register
+    userForm.style.display = 'block'; // Show the form
+    authModal.style.display = 'none'; // Hide the modal
+});
+
+// Close modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    if (event.target === authModal) {
+        authModal.style.display = 'none';
+    }
+});
 
 
 
-
-// Mock API order function for demonstration
 const inventory = {
-    peach: { quantity: 10, age: 3 },
-    oranges: { quantity: 10, age: 5 },
-    bananas: { quantity: 5, age: 10 },
-    peas: { quantity: 15, age: 2 },
-    mangoes: { quantity: 10, age: 6 },
-    arrowroots: { quantity: 7, age: 9 },
-    lime: { quantity: 16, age: 7 },
-    macadamia: { quantity: 20, age: 9 },
-    berry: { quantity: 6, age: 8 },
-    watermelon: { quantity: 12, age: 4 }
+    peach: { quantity: 10, age: 3, description: "Juicy and sweet, rich in vitamins A and C." },
+    oranges: { quantity: 10, age: 5, description: "Packed with vitamin C, boosts the immune system." },
+    bananas: { quantity: 5, age: 10, description: "High in potassium and vitamin B6, provides quick energy." },
+    peas: { quantity: 15, age: 2, description: "Rich in protein, fiber, and vitamins A and C." },
+    mangoes: { quantity: 10, age: 6, description: "High in vitamins A and C, supports immune function." },
+    arrowroots: { quantity: 7, age: 9, description: "Rich in fiber and carbohydrates, aids in digestive health." },
+    lime: { quantity: 16, age: 7, description: "Great source of vitamin C, enhances immune function." },
+    macadamia: { quantity: 20, age: 9, description: "High in healthy fats, supports heart health." },
+    berry: { quantity: 6, age: 8, description: "Rich in antioxidants and vitamins, improves heart health." },
+    watermelon: { quantity: 12, age: 4, description: "Hydrating and rich in vitamins A and C." }
 };
+
 
 // Function to determine the fruits that should be discounted
 function determineDiscountedFruits() {
@@ -71,8 +103,9 @@ function displayInventory() {
     const inventoryList = document.getElementById('inventoryList');
     inventoryList.innerHTML = ''; // Clear the list before updating
     for (let fruit in inventory) {
+        const { quantity, age, description } = inventory[fruit];
         const listItem = document.createElement('li');
-        listItem.textContent = `${fruit}: ${inventory[fruit].quantity} available (Age: ${inventory[fruit].age} days)`;
+        listItem.innerHTML = `<strong>${fruit.charAt(0).toUpperCase() + fruit.slice(1)}</strong>: ${quantity} available (Age: ${age} days) - ${description}`;
         inventoryList.appendChild(listItem);
     }
 }
@@ -143,7 +176,7 @@ function notify(notification, query, style = {}) {
     // Auto-hide notification after 5 seconds
     setTimeout(() => {
         notificationElement.style.display = 'none';
-    }, 10000); // 5 seconds delay
+    }, 10000); //10 seconds delay
 }
 
 

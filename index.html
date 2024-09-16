@@ -11,22 +11,33 @@
 <body>
     <div id="app">
         <h1 class="order"> Order Your Fresh Fruit </h1>
-        <h2 class="member"> <span><i
-            class="ri-user-line"></i></span></h2>
+          <!-- Member Icon -->
+    <h2 class="member">
+        <span><i class="ri-user-line"></i></span>
+    </h2>
+ <!-- Search Input -->
+ <input type="text" id="searchInput" placeholder="Search..." />
+ <span><ul id="results"></ul></span>
+  
 
-        <input type="text" id="searchInput" placeholder="Search..." />
-        <span> <ul id="results"></ul></span>
+ <!-- Modal for Sign In / Sign Up options -->
+ <div id="authModal" class="modal" style="display: none;">
+    <h3>Choose an Action</h3>
+    <button id="signInBtn">Sign In</button>
+    <button id="signUpBtn">Sign Up</button>
+</div>
 
-        <form action="/user-action" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <select name="action">
-                <option value="register">Register</option>
-                <option value="login">Login</option>
-            </select>
+<!-- Form initially hidden -->
+<form id="userForm" action="/user-action" method="POST" style="display: none;">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <select name="action" id="userAction">
+        <option value="login">Sign In</option>
+        <option value="register">Sign Up</option>
+    </select>
 
-            <button type="submit" class="submii">Submit</button>
-        </form>
+    <button type="submit" class="submii">Submit</button>
+</form>
 
         <form id="orderForm">
             <label for="variety">Fruit Variety:</label>
@@ -63,6 +74,9 @@
                 <label for="emailInput">Enter your email *</label>
                 <input type="email" id="emailInput" name="email" placeholder="Email address" >
                 <div id="subscribeNotification"></div>
+
+                <ul id="fruitList"></ul>
+
 
                 <div class="SubmitButton_container__3wNjE submitButtonContainer">
                     <input class="SubmitButton_submitButton__28tLg button1 contact-form-submit-btn" 
