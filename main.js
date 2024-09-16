@@ -4,11 +4,13 @@ const scrollRevealOption = {
     duration:1000,
 };
 
-scrollRevealOption().reveal(".member",{
-    ...scrollRevealOption,
-    delay:500
-});
+const sr = ScrollReveal();
 
+// Apply the reveal effect
+sr.reveal(".member", {
+    ...scrollRevealOption,
+    delay: 500
+});
 
 
 
@@ -119,9 +121,11 @@ function notify(notification, query, style = {}) {
     }
 
     // Display remaining inventory for the ordered fruit
-    const remainingElement = document.createElement('p');
-    remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()].quantity}`;
-    notificationElement.appendChild(remainingElement);
+    if (query && query.variety && inventory[query.variety.toLowerCase()]) {
+        const remainingElement = document.createElement('p');
+        remainingElement.textContent = `Remaining ${query.variety}: ${inventory[query.variety.toLowerCase()].quantity}`;
+        notificationElement.appendChild(remainingElement);
+    }
 
     // Display discount information if applicable
     if (notification.discount) {
@@ -131,7 +135,7 @@ function notify(notification, query, style = {}) {
         notificationElement.appendChild(discountElement);
     }
 
-    // Trigger order confirmation modal based on success flag, not the message content
+    // Trigger order confirmation modal based on success flag
     if (notification.success) {
         showOrderConfirmationModal(query);
     }
@@ -139,8 +143,9 @@ function notify(notification, query, style = {}) {
     // Auto-hide notification after 5 seconds
     setTimeout(() => {
         notificationElement.style.display = 'none';
-    }, 5000); // 5 seconds delay
+    }, 10000); // 5 seconds delay
 }
+
 
 
 /**
