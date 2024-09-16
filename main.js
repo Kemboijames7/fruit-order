@@ -21,7 +21,8 @@ const userAction = document.getElementById('userAction');
 
 // Show the Sign In / Sign Up modal when the member icon is clicked
 memberIcon.addEventListener('click', function() {
-    authModal.style.display = 'block'; // Show modal
+    
+    authModal.style.display =  'flex'; // Show modal
 });
 
 // Handle the Sign In button click
@@ -36,6 +37,11 @@ signUpBtn.addEventListener('click', function() {
     userAction.value = 'register'; // Set form action to register
     userForm.style.display = 'block'; // Show the form
     authModal.style.display = 'none'; // Hide the modal
+});
+
+// Stop event propagation when clicking inside the modal content
+authModal.addEventListener('click', function(event) {
+    event.stopPropagation(); // Prevent clicks inside the modal from bubbling up
 });
 
 // Close modal when clicking outside of it

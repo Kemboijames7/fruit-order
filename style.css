@@ -32,7 +32,7 @@ h1  {
     padding-left: 300px;
 }
 
-/* Modal styling */
+/* General Modal Styling */
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
@@ -44,16 +44,29 @@ h1  {
     z-index: 1000; /* Ensure modal is on top */
     justify-content: center;
     align-items: center;
+    overflow: auto; /* Allow scrolling if needed */
 }
 
+/* Modal Content Styling */
 .modal-content {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    width: 300px;
-    margin: auto;
+    width: 300px; /* Adjust as needed */
+    max-width: 90%; /* Prevent it from being too wide on small screens */
+    position: relative; /* For positioning the close button */
 }
+
+/* Close Button Styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+ 
 
 button {
     padding: 10px 20px;
