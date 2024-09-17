@@ -18,11 +18,11 @@ const userForm = document.getElementById('userForm');
 const signInBtn = document.getElementById('signInBtn');
 const signUpBtn = document.getElementById('signUpBtn');
 const userAction = document.getElementById('userAction');
+const actionCode = document.getElementById('actionCode'); // Added for showing action code
 
 // Show the Sign In / Sign Up modal when the member icon is clicked
 memberIcon.addEventListener('click', function() {
-    
-    authModal.style.display =  'flex'; // Show modal
+    authModal.style.display = 'flex'; // Show modal
 });
 
 // Handle the Sign In button click
@@ -30,6 +30,7 @@ signInBtn.addEventListener('click', function() {
     userAction.value = 'login'; // Set form action to login
     userForm.style.display = 'block'; // Show the form
     authModal.style.display = 'none'; // Hide the modal
+    actionCode.textContent = 'Login'; // Display 'Login' next to the member icon
 });
 
 // Handle the Sign Up button click
@@ -37,6 +38,7 @@ signUpBtn.addEventListener('click', function() {
     userAction.value = 'register'; // Set form action to register
     userForm.style.display = 'block'; // Show the form
     authModal.style.display = 'none'; // Hide the modal
+    actionCode.textContent = 'Register'; // Display 'Register' next to the member icon
 });
 
 // Stop event propagation when clicking inside the modal content
@@ -232,12 +234,7 @@ function showOrderConfirmationModal(query) {
         }
     }
 }
-
-/**
- * Helper function to place an order by just passing variety and quantity.
- * @param {string} variety - The type of fruit to order.
- * @param {number} quantity - The quantity of fruit to order.
- */
+ 
 function postOrder(variety, quantity) {
     const discountInfo = applyDiscount(variety, quantity);
     const query = { variety, quantity: quantity }; // Use updated quantity if discount is applied
@@ -261,24 +258,39 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
 displayInventory();
 
 
-document.getElementById('subscribeForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+const subscribedEmails = new Set(); // Set to store unique emails
 
-    const emailInput = document.getElementById('emailInput').value;
+document.getElementById('subscribeForm').addEventListener('submit', function(event) {
+    event.preventDefault();  
+
+    const emailInput = document.getElementById('emailInput').value.trim();  
     const notification = document.getElementById('subscribeNotification');
 
-    // Here you would typically send the email to your server or an API
-    // For demonstration, we'll just simulate a successful subscription
-
     if (emailInput) {
-        notification.textContent = `Thank you for subscribing! A confirmation email has been sent to ${emailInput}.`;
-        notification.style.color = 'green';
-        notification.style.fontWeight = 'bold';
+        if (subscribedEmails.has(emailInput)) {
+            
+            // If the email already exists in the Set
+            notification.textContent = `You are already subscribed with the email: ${emailInput}.`;
+            notification.style.color = '#B80000';
+            notification.style.fontWeight = 'bold';
+        } else {
+            // If it's a new email, add it to the Set
+            subscribedEmails.add(emailInput);
+            notification.textContent = `Thank you for subscribing! A confirmation email has been sent to ${emailInput}.`;
+            notification.style.color = 'green';
+            notification.style.fontWeight = 'bold';
+        }
     } else {
         notification.textContent = 'Please enter a valid email address.';
         notification.style.color = 'red';
     }
 
-    // Clear the input field
+    // Clear the input field after submission
     document.getElementById('subscribeForm').reset();
+
+    setTimeout(() => {
+        notification.textContent = '';  
+    }, 10000);
+
+
 });
