@@ -11,6 +11,15 @@ sr.reveal(".member", {
     ...scrollRevealOption,
     delay: 500
 });
+
+// feature container
+ScrollReveal().reveal(".feature__card", {
+    ...scrollRevealOption,
+    interval: 500,
+  });
+
+
+
 // Modal and form elements
 const memberIcon = document.querySelector('.member');
 const authModal = document.getElementById('authModal');
@@ -22,7 +31,7 @@ const actionCode = document.getElementById('actionCode'); // Added for showing a
 
 // Show the Sign In / Sign Up modal when the member icon is clicked
 memberIcon.addEventListener('click', function() {
-    authModal.style.display = 'flex'; // Show modal
+    authModal.style.display = 'inline-block'; // Show modal
 });
 
 // Handle the Sign In button click
@@ -46,12 +55,27 @@ authModal.addEventListener('click', function(event) {
     event.stopPropagation(); // Prevent clicks inside the modal from bubbling up
 });
 
-// Close modal when clicking outside of it
-window.addEventListener('click', function(event) {
+// Close modal when clicking outside the modal content
+authModal.addEventListener('click', function(event) {
     if (event.target === authModal) {
-        authModal.style.display = 'none';
+        authModal.style.display = 'none'; // Hide modal
     }
 });
+
+
+document.getElementById('searchInput').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      
+        const inputText = document.getElementById('searchInput').value;
+
+        const words = inputText.split(' ');
+
+        const firstTwoWords = words.slice(0, 2).join(' ');
+
+        document.getElementById('result').textContent = firstTwoWords;
+    }
+});
+
 
 
 

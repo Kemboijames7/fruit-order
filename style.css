@@ -32,6 +32,8 @@ h1  {
     padding-left: 300px;
 }
 
+
+
 /* General Modal Styling */
 .modal {
     display: none; /* Hidden by default */
@@ -141,6 +143,9 @@ button:hover {
 
 
 #app {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
     
     background-color: #C5705D;
     width: 900px;
@@ -205,31 +210,6 @@ button:hover {
     font-weight: bold;
 }
 
-/* Modal container */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Modal content */
-.modal-content {
-    background-color: #FAEDCE;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
 
 /* Close button */
 .close-button {
@@ -351,4 +331,37 @@ button:hover {
     color: var(--text-light);
     transition: 0.3s;
     
+  }
+
+  
+  .feature__grid {
+    margin-top: 4rem;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .feature__card {
+    color: #0f0e0e;
+    margin: 10px;
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #FFE5CF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature__card span {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    color: #FF885B;
+  }
+
+  .feature__card h4 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .feature__card p {
+    color: #666;
   }
