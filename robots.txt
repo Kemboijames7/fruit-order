@@ -1,0 +1,17 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Organic Apples",
+  "image": "https://fruit-order.vercel.app
+.com/images/apples.jpg",
+  "description": "Fresh organic apples directly from the farm.",
+  "sku": "12345",
+  "offers": {
+    "@type": "Offer",
+    "price": "3.99",
+    "priceCurrency": "Ksh",
+    "availability": "InStock"
+  }
+}
+</script>
