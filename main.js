@@ -1,19 +1,39 @@
-// darkmode && ligtmode
-const toggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-
-toggleButton.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('theme', currentTheme);
-});
-
-// Apply saved theme on page load
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-}
-
-
+ // JavaScript for theme toggle 
+ const dropdownContainer = document.querySelector('.dropdown-container');
+ const dropdownButton = document.querySelector('.dropdown-button');
+ const lightModeLink = document.getElementById('lightMode');
+ const darkModeLink = document.getElementById('darkMode');
+ const body = document.body;
+ 
+ // Toggle dropdown visibility
+ dropdownButton.addEventListener('click', () => {
+     dropdownContainer.classList.toggle('active');
+     console.log('Dropdown Container Classes:', dropdownContainer.className); // Debugging
+ });
+ 
+ // Change theme to light mode
+ lightModeLink.addEventListener('click', (event) => {
+     event.preventDefault(); // Prevent default anchor behavior
+     body.classList.remove('dark-mode'); // Ensure dark mode is off
+     localStorage.setItem('theme', 'light'); // Save preference
+     console.log('Theme changed to Light Mode');
+ });
+ 
+ // Change theme to dark mode
+ darkModeLink.addEventListener('click', (event) => {
+     event.preventDefault(); // Prevent default anchor behavior
+     body.classList.add('dark-mode'); // Apply dark mode
+     localStorage.setItem('theme', 'dark'); // Save preference
+     console.log('Theme changed to Dark Mode');
+ });
+ 
+ // Apply saved theme on page load
+ if (localStorage.getItem('theme') === 'dark') {
+     body.classList.add('dark-mode');
+ } else {
+     body.classList.remove('dark-mode'); // Ensure light mode is set if not dark
+ }
+ 
 
 
 
@@ -338,4 +358,6 @@ document.getElementById('subscribeForm').addEventListener('submit', function(eve
 
 });
 
-
+if (!document.body.classList.contains('light-mode') && !document.body.classList.contains('dark-mode')) {
+    
+}

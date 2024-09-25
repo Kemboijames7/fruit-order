@@ -19,13 +19,106 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #DEAC80;
+    background-color: #F5F5F5;  
+    color: #333333; 
+    transition: background-color 0.3s, color 0.3s;
+    /* background-color: #DEAC80; */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
 }
+
+h1, h2, h3, p {
+    color: black; /* Ensure text elements are visible */
+}
+
+body.dark-mode {
+    background-color: #1C1C1C; /* Dark background */
+    color: #E0E0E0; /* Light text color */
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3 {
+    color: white;  
+}
+
+body.dark-mode button {
+    background-color: #4A4A4A;  
+    color: #FFFFFF;  
+}
+
+a {
+    color: #007BFF; 
+}
+
+body.dark-mode a {
+    color: #A6D7FF;  
+}
+
+.theme-dropdown {
+    position: absolute; /* Adjust position as needed */
+    top: 20px; /* Adjust vertical position */
+    right: 20px; /* Adjust horizontal position */
+    z-index: 1000; /* Ensure it appears on top */
+}
+
+body.dark-mode .dropdown-content {
+    background-color: #2A2A2A;  
+    color: #E0E0E0;  
+}
+
+.dropdown-content {
+    display: none; /* Hide dropdown content by default */
+    position: absolute; /* Position it relative to dropdown */
+    background-color: white; /* Background for dropdown */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    z-index: 1; /* Ensure it appears above other elements */
+}
+
+.dropdown-container.active .dropdown-content {
+    display: block; /* Show dropdown when active */
+}
+/* Dark mode styles */
+/* Hide the dropdown by default */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 10px;
+}
+
+/* Show dropdown when active class is present */
+.dropdown-container.active .dropdown-content {
+    display: block !important;  /* !important for debugging to ensure it's visible */
+}
+
+/* Button styles */
+.dropdown-button {
+    background-color: #f9f9f9;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* Dropdown link styles */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
 
 h1  {
     
