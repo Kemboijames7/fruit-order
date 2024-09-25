@@ -1,3 +1,22 @@
+// darkmode && ligtmode
+const toggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+
+toggleButton.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
+});
+
+// Apply saved theme on page load
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+}
+
+
+
+
+
 const scrollRevealOption = {
     distance: "50px",
     origin: "bottom",
@@ -318,3 +337,5 @@ document.getElementById('subscribeForm').addEventListener('submit', function(eve
 
 
 });
+
+
