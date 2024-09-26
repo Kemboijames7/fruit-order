@@ -8,22 +8,22 @@
  // Toggle dropdown visibility
  dropdownButton.addEventListener('click', () => {
      dropdownContainer.classList.toggle('active');
-     console.log('Dropdown Container Classes:', dropdownContainer.className); // Debugging
+    
  });
  
  // Change theme to light mode
  lightModeLink.addEventListener('click', (event) => {
-     event.preventDefault(); // Prevent default anchor behavior
-     body.classList.remove('dark-mode'); // Ensure dark mode is off
-     localStorage.setItem('theme', 'light'); // Save preference
-     console.log('Theme changed to Light Mode');
+     event.preventDefault(); 
+     body.classList.remove('dark-mode'); 
+     localStorage.setItem('theme', 'light'); 
+ 
  });
  
  // Change theme to dark mode
  darkModeLink.addEventListener('click', (event) => {
-     event.preventDefault(); // Prevent default anchor behavior
-     body.classList.add('dark-mode'); // Apply dark mode
-     localStorage.setItem('theme', 'dark'); // Save preference
+     event.preventDefault(); 
+     body.classList.add('dark-mode'); 
+     localStorage.setItem('theme', 'dark'); 
      console.log('Theme changed to Dark Mode');
  });
  
@@ -31,16 +31,16 @@
  if (localStorage.getItem('theme') === 'dark') {
      body.classList.add('dark-mode');
  } else {
-     body.classList.remove('dark-mode'); // Ensure light mode is set if not dark
+     body.classList.remove('dark-mode'); 
  }
  
 
 
 
 const scrollRevealOption = {
-    distance: "50px",
-    origin: "bottom",
-    duration:1000,
+    distance: "30px",
+    origin: "top",
+    duration:650,
 };
 
 const sr = ScrollReveal();
@@ -48,13 +48,13 @@ const sr = ScrollReveal();
 // Apply the reveal effect
 sr.reveal(".member", {
     ...scrollRevealOption,
-    delay: 500
+    delay: 400
 });
 
 // feature container
 ScrollReveal().reveal(".feature__card", {
     ...scrollRevealOption,
-    interval: 500,
+    interval: 400,
   });
 
 
@@ -66,38 +66,38 @@ const userForm = document.getElementById('userForm');
 const signInBtn = document.getElementById('signInBtn');
 const signUpBtn = document.getElementById('signUpBtn');
 const userAction = document.getElementById('userAction');
-const actionCode = document.getElementById('actionCode'); // Added for showing action code
+const actionCode = document.getElementById('actionCode'); 
 
-// Show the Sign In / Sign Up modal when the member icon is clicked
+
 memberIcon.addEventListener('click', function() {
-    authModal.style.display = 'inline-block'; // Show modal
+    authModal.style.display = 'inline-block';
 });
 
 // Handle the Sign In button click
 signInBtn.addEventListener('click', function() {
-    userAction.value = 'login'; // Set form action to login
-    userForm.style.display = 'block'; // Show the form
-    authModal.style.display = 'none'; // Hide the modal
-    actionCode.textContent = 'Login'; // Display 'Login' next to the member icon
+    userAction.value = 'login';  
+    userForm.style.display = 'block';  
+    authModal.style.display = 'none';  
+    actionCode.textContent = 'Login';  
 });
 
 // Handle the Sign Up button click
 signUpBtn.addEventListener('click', function() {
-    userAction.value = 'register'; // Set form action to register
-    userForm.style.display = 'block'; // Show the form
-    authModal.style.display = 'none'; // Hide the modal
-    actionCode.textContent = 'Register'; // Display 'Register' next to the member icon
+    userAction.value = 'register';  
+    userForm.style.display = 'block';  
+    authModal.style.display = 'none';  
+    actionCode.textContent = 'Register';  
 });
 
-// Stop event propagation when clicking inside the modal content
+ 
 authModal.addEventListener('click', function(event) {
-    event.stopPropagation(); // Prevent clicks inside the modal from bubbling up
+    event.stopPropagation();  
 });
 
-// Close modal when clicking outside the modal content
+ 
 authModal.addEventListener('click', function(event) {
     if (event.target === authModal) {
-        authModal.style.display = 'none'; // Hide modal
+        authModal.style.display = 'none';  
     }
 });
 
@@ -172,7 +172,7 @@ function applyDiscount(variety, quantity) {
 
 function displayInventory() {
     const inventoryList = document.getElementById('inventoryList');
-    inventoryList.innerHTML = ''; // Clear the list before updating
+    inventoryList.innerHTML = '';  
     for (let fruit in inventory) {
         const { quantity, age, description } = inventory[fruit];
         const listItem = document.createElement('li');
@@ -259,19 +259,12 @@ function onSuccess(query) {
     notify({ message: 'The order was successful' }, query, { color: "#1A3636" });
 }
 
-/**
- * Callback function for failed orders.
- */
+ 
 function onError(notification) {
     notify(notification, null, { color: "red" });
 }
 
-/**
- * Wraps the grocer's order function.
- * @param {Object} query - The query object containing variety and quantity.
- * @param {Function} onSuccess - The success callback.
- * @param {Function} onError - The error callback.
- */
+ 
 function orderFromGrocer(query, onSuccess, onError) {
     order(query, onSuccess, onError);
 }
@@ -300,7 +293,7 @@ function showOrderConfirmationModal(query) {
  
 function postOrder(variety, quantity) {
     const discountInfo = applyDiscount(variety, quantity);
-    const query = { variety, quantity: quantity }; // Use updated quantity if discount is applied
+    const query = { variety, quantity: quantity }; 
 
     if (discountInfo.discount) {
         query.quantity = Math.ceil(quantity * (1 - discountInfo.discountAmount));
