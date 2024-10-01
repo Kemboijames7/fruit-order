@@ -354,3 +354,28 @@ document.getElementById('subscribeForm').addEventListener('submit', function(eve
 if (!document.body.classList.contains('light-mode') && !document.body.classList.contains('dark-mode')) {
     
 }
+
+
+const sections = document.querySelectorAll('footer__socials a');  
+const navLinks = document.querySelectorAll('#searchInput');  
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top + window.scrollY; // Get the top position relative to the viewport
+    const sectionHeight = section.clientHeight;
+
+    // Check if the section is currently in view
+    if (window.scrollY >= sectionTop - sectionHeight / 3) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
