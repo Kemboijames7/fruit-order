@@ -48,7 +48,7 @@ const sr = ScrollReveal();
 // Apply the reveal effect
 sr.reveal(".member", {
     ...scrollRevealOption,
-    delay: 400
+    delay: 400,
 });
 
 // feature container
